@@ -204,13 +204,13 @@ void parse_device_list(uint8 *msg)
 		unsigned long long extAddr = 0;
 		memcpy(&extAddr, &msg[n+4], 8);
 
-		printf("extAddr: ");
-		int s;
-		for (s = 0; s < 8; ++s)
-		{
-			printf("%02X ", msg[n+4+s]);
-		}
-		printf("\n");
+		//printf("extAddr: ");
+		//int s;
+		//for (s = 0; s < 8; ++s)
+		//{
+		//	printf("%02X ", msg[n+4+s]);
+		//}
+		//printf("\n");
 
 		int k;
 		uint8_t bexist = 0;
@@ -481,7 +481,7 @@ void gw_pass_through_data( unsigned int device_id, unsigned char * data, unsigne
 	unsigned long long extAddr = 0;
 	if (zb_get_device_info(device_id, &nwkAddr, &ep, &extAddr))
 	{
-		printf("get_zb_info, device_id: %u cluster_id: %04X nwkAddr: %u ep: %u extAddr: %llX\n", device_id, CLUSTER_ID_QQ_IOT, nwkAddr, ep, extAddr);
+		//printf("get_zb_info, device_id: %u cluster_id: %04X nwkAddr: %u ep: %u extAddr: %llX\n", device_id, CLUSTER_ID_QQ_IOT, nwkAddr, ep, extAddr);
 		uart_standard_frame(nwkAddr, ep, CLUSTER_ID_QQ_IOT, data, data_len);
 	}
 	else
@@ -525,11 +525,17 @@ void parse_sub_dev_join( unsigned short nwkAddr, unsigned char ep, unsigned char
 
 void print_sub_log( uint8 * data, uint16 data_len )
 {
-	printf("sub_log: ");
-	int i;
-	for (i = 0; i < data_len; ++i)
-	{
-		printf("%02X ", data[i]);
-	}
-	printf("\n");
+	uint8 * log = (uint8*)malloc((data_len + 1)*sizeof(uint8));
+	memset(log, 0, (data_len+1)*sizeof(uint8));
+	memcpy(log, data, data_len);
+	printf("sub_log: %s\n", log);
+	free(log);
+
+	//printf("sub_log: ");
+	//int i;
+	//for (i = 0; i < data_len; ++i)
+	//{
+	//	printf("%02X ", data[i]);
+	//}
+	//printf("\n");
 }
