@@ -1,2 +1,2 @@
 # gw_demo
-iot gateway demo 1.1
+iot gateway demo 1.2
