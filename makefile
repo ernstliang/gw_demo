@@ -4,7 +4,7 @@ CROSS	:=
 
 PLATFORM:=
 
-CFLAGS:= -m32 -g -Wall -D_USE_GW_SDK_
+CFLAGS:= -m32 -g -Wall -pg
 CXXFLAGS:=
 
 USR_LIB	:=
@@ -22,7 +22,7 @@ INCLUDE += -I../include               #libgwsdk.so headers
 INCLUDE += -I./
 
 #需要引用的库
-#LIB     += -L../txdevicesdk/ -ltxdevicesdk   
+LIB     += -L../txdevicesdk/ -ltxdevicesdk   
 LIB		+= -L../GatewaySDK -lgwsdk
 LIB     += -lpthread  -lrt -lm -ldl
 
@@ -41,7 +41,7 @@ DEPS    += $(patsubst %.o, %.d, $(OBJS))
 .PHONY: all
 all: $(DEPS) $(OBJS)
 	$(CC) $(OBJS) $(LIB) -o $(TARGETS)
-	$(STRIP) $(TARGETS)
+	#$(STRIP) $(TARGETS)
 
 -include $(DEPS)
 
